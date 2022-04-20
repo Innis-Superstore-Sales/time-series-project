@@ -31,6 +31,8 @@
 import pandas as pd
 from get_db_url import get_db_url
 
+from _acquire import Acquire
+
 ################################################################################
 
 class AcquireSuperstore(Acquire):
