@@ -76,22 +76,22 @@ def holt_model(target, train, validate):
 
 ################################################################################
 
-def prophet_model(target, train, validate):
+def prophet_model(target, train, validate, period = 365):
     model = Prophet()
     model.fit(pd.DataFrame({
         'ds' : train.index,
         'y' : train[target]
     }))
 
-    future = model.make_future_dataframe(365)
+    future = model.make_future_dataframe(period)
     results = model.predict(future)
     predictions = results[['ds', 'yhat']].set_index('ds')
     predictions.columns = [target]
-    return predictions.resample('Q').mean()
+    return predictions.resample('M').mean()
 
 ################################################################################
 
 def previous_cycle_model(target, train, validate):
-    predictions = train.loc['2015'] + train.diff(4).mean()
+    predictions = train.loc['2015'] + train.diff(12).mean()
     predictions.index = validate.index
     return predictions
