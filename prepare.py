@@ -36,6 +36,17 @@ def prepare(df: pd.DataFrame) -> pd.DataFrame:
 
 ################################################################################
 
+def prepare_remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
+    df = clean_columns(df)
+    df = remove_outliers(df, 1.5, ['sales'])
+    by_week = df.resample('W').sum()
+    east_by_week, west_by_week, central_by_week, south_by_week = separate_by_region(df)
+    office_supplies_by_week, furniture_by_week, technology_by_week = separate_by_category(df)
+
+    return by_week, east_by_week, west_by_week, central_by_week, south_by_week, office_supplies_by_week, furniture_by_week, technology_by_week
+
+################################################################################
+
 def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = [column.lower().replace(' ', '_').replace('-','_') for column in df]
     df.order_date = pd.to_datetime(df.order_date)
@@ -82,7 +93,7 @@ def split_data(df: pd.DataFrame) -> tuple[pd.DataFrame]:
 
 ################################################################################
 
-def remove_outliers(df: pd.core.frame.DataFrame, k: float, col_list: list[str]) -> pd.core.frame.DataFrame:
+def remove_outliers(df: pd.DataFrame, k: float, col_list: list[str]) -> pd.DataFrame:
     '''
         Remove outliers from a list of columns in a dataframe 
         and return that dataframe.

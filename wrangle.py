@@ -23,3 +23,8 @@ from prepare import prepare
 
 def wrangle():
     return prepare(AcquireSuperstore().get_data())
+
+################################################################################
+
+def wrangle_remove_outliers():
+    return prepare_remove_outliers(AcquireSuperstore().get_data())
