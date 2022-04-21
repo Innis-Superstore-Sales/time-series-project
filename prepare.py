@@ -16,6 +16,7 @@
         separate_by_region(df)
         separate_by_category(df)
         split_data(df)
+        remove_outliers(df, k, col_list)
 
 '''
 
@@ -78,3 +79,43 @@ def split_data(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     test = df.loc['2017']
 
     return train, validate, test
+
+################################################################################
+
+def remove_outliers(df: pd.core.frame.DataFrame, k: float, col_list: list[str]) -> pd.core.frame.DataFrame:
+    '''
+        Remove outliers from a list of columns in a dataframe 
+        and return that dataframe.
+        
+        Parameters
+        ----------
+        df: DataFrame
+            A pandas dataframe containing data from which we want to remove
+            outliers.
+        
+        k: float
+            A numeric value that indicates how strict our outlier threshold
+            should be. Typically 1.5.
+
+        col_list: list[str]
+            A list of columns from which we want to remove outliers.
+        
+        Returns
+        -------
+        DataFrame: A pandas dataframe with outliers removed.
+    '''
+    
+    for col in col_list:
+
+        q1, q3 = df[col].quantile([.25, .75])  # get quartiles
+        
+        iqr = q3 - q1   # calculate interquartile range
+        
+        upper_bound = q3 + k * iqr   # get upper bound
+        lower_bound = q1 - k * iqr   # get lower bound
+
+        # return dataframe without outliers
+        
+        df = df[(df[col] > lower_bound) & (df[col] < upper_bound)]
+        
+    return df
