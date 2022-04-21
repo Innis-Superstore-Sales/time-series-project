@@ -15,6 +15,7 @@
         clean_columns(df)
         separate_by_region(df)
         separate_by_category(df)
+        split_data(df)
 
 '''
 
@@ -68,3 +69,12 @@ def separate_by_category(df: pd.DataFrame) -> tuple[pd.DataFrame]:
     technology_by_week = technology.resample('W').sum()
 
     return office_supplies_by_week, furniture_by_week, technology_by_week
+
+################################################################################
+
+def split_data(df: pd.DataFrame) -> tuple[pd.DataFrame]:
+    train = df.loc[ : '2015']
+    validate = df.loc['2016']
+    test = df.loc['2017']
+
+    return train, validate, test
