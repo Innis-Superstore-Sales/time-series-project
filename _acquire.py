@@ -60,7 +60,7 @@ class Acquire:
 
     ################################################################################
 
-    def get_data(self, use_cache: bool = True, cache_data: bool = True, output = True) -> pd.DataFrame:
+    def get_data(self, use_cache: bool = True, cache_data: bool = True, output = False) -> pd.DataFrame:
         '''
             Return a dataframe containing data from the database defined by 
             self.database_name.
