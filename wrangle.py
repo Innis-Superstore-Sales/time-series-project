@@ -2,15 +2,17 @@
 
     wrangle.py
 
-    Description: Description
+    Description: This file contains functions used for acquiring and preparing 
+        the superstore data.
 
     Variables:
 
-        Variable
+        None
 
     Functions:
 
-        Function
+        wrangle()
+        wrangle_remove_outliers()
 
 '''
 
