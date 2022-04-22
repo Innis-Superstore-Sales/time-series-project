@@ -3,6 +3,8 @@
 This repository contains all deliverables for the superstore time series project including additional files used 
 in the process of producing the final deliverables.
 
+Click this [link](https://docs.google.com/presentation/d/1UIXDBEbHVVMIBVPWmz8MOXP0YEflioVAFBfA8wPpOgo/edit?usp=sharing) for the slideshow.
+
 **Repository Format**
 <details>
 <summary>Click to expand</summary>
