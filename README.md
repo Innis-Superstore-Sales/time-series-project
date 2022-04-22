@@ -44,7 +44,7 @@ ___
 
 ## Project Summary
 
-<i>pending</i>
+Our team conducted time series analysis on four years of sales figures from a superstore in order to determine sales goals for the next year and the courses of action that would help to reach those goals. We used Pandas and Seaborn to gather insights, and used FB Prophet to create a sales and profit forecast.
 
 ___
 
@@ -186,7 +186,13 @@ ___
 
 ## Conclusion
 
-<i>pending</i>
+There is a steady increase in sales, and profit, over the four year span of 2014 through 2017, but rate of increasing growth is not significant. Large discounts are affecting the bottom line and resulting in losses. Our best forecast predicts continued sales growth in 2018, but there is room for improvement.
+
+Our recommendations are as follow:
+- Maintain momentum in the second half of the year, what we're doing is working.
+- Target low sales month such as January and February by running promotions to increase sales numbers.
+- Set a maximum discount rate to minimize losses.
+- Begin tracking the reason why discounts are being, since that is something we would like to analyze.
 
 ___
 
