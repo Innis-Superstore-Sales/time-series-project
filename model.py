@@ -98,11 +98,11 @@ def holt_model(target, train, validate):
 ################################################################################
 
 def prophet_model(target, train, validate, period = 365):
-    model = Prophet()
+    model = Prophet(weekly_seasonality = True)
     model.fit(pd.DataFrame({
         'ds' : train.index,
         'y' : train[target]
-    }), verbose = False)
+    }))
 
     future = model.make_future_dataframe(period)
     results = model.predict(future)
