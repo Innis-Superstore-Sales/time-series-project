@@ -47,22 +47,22 @@ def create_models(target, train, validate, eval_df):
 
 ################################################################################
 
-def establish_baseline(train: pd.DataFrame, validate: pd.DataFrame, periods: list[int]) -> pd.DataFrame:
+def establish_baseline(train: pd.DataFrame, validate: pd.DataFrame, periods: list[int], target: str = 'sales') -> pd.DataFrame:
     forecast_values = {
-        'Last Observed Value' : round(train.sales[-1], 2),
-        'Simple Average' : round(train.sales.mean(), 2)
+        'Last Observed Value' : round(train[target][-1], 2),
+        'Simple Average' : round(train[target].mean(), 2)
     }
 
     for period in periods:
-        forecast_values[f'Moving Average {period} Weeks'] = round(train.sales.rolling(period).mean()[-1], 2)
+        forecast_values[f'Moving Average {period} Weeks'] = round(train[target].rolling(period).mean()[-1], 2)
 
     predictions = {}
     for key, value in forecast_values.items():
-        predictions[key] = make_static_predictions('sales', value, validate.index)
+        predictions[key] = make_static_predictions(target, value, validate.index)
 
     eval_df = None
     for key, prediction in predictions.items():
-        eval_df = append_eval_df(key, 'sales', validate, prediction, eval_df)
+        eval_df = append_eval_df(key, target, validate, prediction, eval_df)
 
     return eval_df[eval_df.rmse == eval_df.rmse.min()]
 
